@@ -1,0 +1,13 @@
+version: '3'
+
+volumes:
+  db-perfecto-data:
+    external: true
+
+services:
+  db-perfecto:
+    image: postgres:9.6
+    volumes:
+      - db-perfecto-data:/var/lib/postgresql/data
+    ports:
+      - '127.0.0.1:1337:5432'
