@@ -1,2 +1,3 @@
-IO.puts "Aliasing Repo, Album, and Artist"
-alias EctoPerfecto.{Repo, Album, Artist}
+IO.puts "Aliasing Repo, MusicLibrary, Album, and Artist"
+alias EctoPerfecto.{Repo, MusicLibrary}
+alias EctoPerfecto.MusicLibrary.{Album, Artist}
