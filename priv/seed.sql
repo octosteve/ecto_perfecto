@@ -1,6 +1,6 @@
 CREATE TABLE "albums"
 (
-    "id" INT NOT NULL,
+    "id" SERIAL,
     "title" VARCHAR(160) NOT NULL,
     "artist_id" INT NOT NULL,
     "inserted_at" TIMESTAMP NOT NULL DEFAULT NOW(),
@@ -10,7 +10,7 @@ CREATE TABLE "albums"
 
 CREATE TABLE "artists"
 (
-    "id" INT NOT NULL,
+    "id" SERIAL,
     "name" VARCHAR(120),
     "inserted_at" TIMESTAMP NOT NULL DEFAULT NOW(),
     "updated_at" TIMESTAMP NOT NULL DEFAULT NOW(),
@@ -19,7 +19,7 @@ CREATE TABLE "artists"
 
 CREATE TABLE "customers"
 (
-    "id" INT NOT NULL,
+    "id" SERIAL,
     "first_name" VARCHAR(40) NOT NULL,
     "last_name" VARCHAR(20) NOT NULL,
     "company" VARCHAR(80),
@@ -39,7 +39,7 @@ CREATE TABLE "customers"
 
 CREATE TABLE "employees"
 (
-    "id" INT NOT NULL,
+    "id" SERIAL,
     "last_name" VARCHAR(20) NOT NULL,
     "first_name" VARCHAR(20) NOT NULL,
     "title" VARCHAR(30),
@@ -61,7 +61,7 @@ CREATE TABLE "employees"
 
 CREATE TABLE "genres"
 (
-    "id" INT NOT NULL,
+    "id" SERIAL,
     "name" VARCHAR(120),
     "inserted_at" TIMESTAMP NOT NULL DEFAULT NOW(),
     "updated_at" TIMESTAMP NOT NULL DEFAULT NOW(),
@@ -70,7 +70,7 @@ CREATE TABLE "genres"
 
 CREATE TABLE "invoices"
 (
-    "id" INT NOT NULL,
+    "id" SERIAL,
     "customer_id" INT NOT NULL,
     "invoice_date" TIMESTAMP NOT NULL,
     "billing_address" VARCHAR(70),
@@ -86,7 +86,7 @@ CREATE TABLE "invoices"
 
 CREATE TABLE "invoice_lines"
 (
-    "id" INT NOT NULL,
+    "id" SERIAL,
     "invoice_id" INT NOT NULL,
     "track_id" INT NOT NULL,
     "unit_price" NUMERIC(10,2) NOT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE "invoice_lines"
 
 CREATE TABLE "media_types"
 (
-    "id" INT NOT NULL,
+    "id" SERIAL,
     "name" VARCHAR(120),
     "inserted_at" TIMESTAMP NOT NULL DEFAULT NOW(),
     "updated_at" TIMESTAMP NOT NULL DEFAULT NOW(),
@@ -107,7 +107,7 @@ CREATE TABLE "media_types"
 
 CREATE TABLE "playlists"
 (
-    "id" INT NOT NULL,
+    "id" SERIAL,
     "name" VARCHAR(120),
     "inserted_at" TIMESTAMP NOT NULL DEFAULT NOW(),
     "updated_at" TIMESTAMP NOT NULL DEFAULT NOW(),
@@ -124,7 +124,7 @@ CREATE TABLE "playlist_tracks"
 
 CREATE TABLE "tracks"
 (
-    "id" INT NOT NULL,
+    "id" SERIAL,
     "name" VARCHAR(200) NOT NULL,
     "album_id" INT,
     "media_type_id" INT NOT NULL,
@@ -15821,3 +15821,14 @@ INSERT INTO "playlist_tracks" ("playlist_id", "track_id") VALUES (17, 2095);
 INSERT INTO "playlist_tracks" ("playlist_id", "track_id") VALUES (17, 2096);
 INSERT INTO "playlist_tracks" ("playlist_id", "track_id") VALUES (17, 3290);
 INSERT INTO "playlist_tracks" ("playlist_id", "track_id") VALUES (18, 597);
+
+select setval('albums_id_seq',(select max(id) from albums));
+select setval('artists_id_seq',(select max(id) from artists));
+select setval('customers_id_seq',(select max(id) from customers));
+select setval('employees_id_seq',(select max(id) from employees));
+select setval('genres_id_seq',(select max(id) from genres));
+select setval('invoices_id_seq',(select max(id) from invoices));
+select setval('invoice_lines_id_seq',(select max(id) from invoice_lines));
+select setval('media_types_id_seq',(select max(id) from media_types));
+select setval('playlists_id_seq',(select max(id) from playlists));
+select setval('tracks_id_seq',(select max(id) from tracks));
